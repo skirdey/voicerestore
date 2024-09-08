@@ -1,7 +1,6 @@
 torch
 torchaudio
 bigvgan
-e2_tts
 jaxtyping
 einops
 x-transformers
