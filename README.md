@@ -4,6 +4,8 @@ VoiceRestore is a state-of-the-art audio restoration model that leverages flow-m
 
 Demo page: [VoiceRestore](https://sparkling-rabanadas-3082be.netlify.app/)
 
+Credits: This repository is based on the [E2-TTS implementation by Lucidrains](https://github.com/lucidrains/e2-tts-pytorch)
+
 ## Key Features
 
 - **Universal Restoration**: Handles multiple types of degradation including reverberation, noise, compression artifacts, and low sampling rates.
