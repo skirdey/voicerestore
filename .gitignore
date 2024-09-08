@@ -1,5 +1,5 @@
 *.pt
-
+test_output.wav
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -19,8 +19,6 @@ class OptimizedAudioRestorationModel(nn.Module):
     def __init__(self):
         super().__init__()
 
-        
-        
         # Initialize VoiceRestore
         self.voice_restore = VoiceRestore(sigma=0.1, transformer={
             'dim': 768, 'depth': 20, 'heads': 16, 'dim_head': 64,
@@ -33,7 +31,7 @@ class OptimizedAudioRestorationModel(nn.Module):
     def forward(self, wav):
         # Convert to Mel-spectrogram
         processed_mel = get_mel_spectrogram(wav, bigvgan_model.h).to(device)
-        
+    
         # Restore audio
         restored_mel = self.voice_restore.sample(processed_mel.transpose(1,2), steps=32, cfg_strength=1.0)
         restored_mel = restored_mel.squeeze(0).transpose(0, 1)
@@ -45,53 +43,20 @@ class OptimizedAudioRestorationModel(nn.Module):
     
 
 
-def load_optimized_model(save_path, optimization_type="jit"):
+def load_model(save_path):
     """
-    Load the optimized model, adjusting key names in the state dict if necessary.
+    Load the model.
     
     Parameters:
     - save_path: The file path where the optimized model is saved.
-    - optimization_type: Type of optimization used ('jit', 'compile', 'state_dict').
     """
-    if optimization_type == "jit":
-        # Load the TorchScript model
-        optimized_model = torch.jit.load(save_path)
-        print("Loaded TorchScript model.")
-    elif optimization_type == "compile":
-        # Load the compiled model (note: you need to recompile it)
-        optimized_model = OptimizedAudioRestorationModel()
-        state_dict = torch.load(save_path)
 
-        # Remove '_orig_mod.' from keys if present
-        new_state_dict = {}
-        for k, v in state_dict.items():
-            new_key = k.replace("_orig_mod.", "")  # Remove '_orig_mod.' prefix
-            new_state_dict[new_key] = v
-        
-        # Load the modified state_dict into the model
-        optimized_model.load_state_dict(new_state_dict, strict=False)
-        optimized_model = torch.compile(optimized_model, backend="inductor")
-        print("Loaded and recompiled model.")
-    elif optimization_type == "state_dict":
-        # Load the state_dict model
-        optimized_model = OptimizedAudioRestorationModel()
-        state_dict = torch.load(save_path)
-
-        # Remove '_orig_mod.' from keys if present
-        new_state_dict = {}
-        for k, v in state_dict.items():
-            new_key = k.replace("_orig_mod.", "")  # Remove '_orig_mod.' prefix
-            new_state_dict[new_key] = v
-
-        # Load the modified state_dict into the model
-        optimized_model.load_state_dict(new_state_dict, strict=False)
-        print("Loaded model state_dict.")
-    else:
-        raise ValueError("Invalid optimization type. Choose from 'jit', 'compile', or 'state_dict'.")
+    optimized_model = OptimizedAudioRestorationModel()
+    state_dict = torch.load(save_path)
+    optimized_model.voice_restore.load_state_dict(state_dict.get("model_state_dict"), strict=True)
+    print("Loaded model state_dict.")
 
     return optimized_model
-
-
 
 
 def restore_audio(model, input_path, output_path):
@@ -102,15 +67,14 @@ def restore_audio(model, input_path, output_path):
         restored_wav = model(wav)
         restored_wav = restored_wav.squeeze(0).cpu()  # Move to CPU after processing
     
-    torchaudio.save(output_path, restored_wav, 24000)
+    torchaudio.save(output_path, restored_wav, sr)
 
 # Example usage
 if __name__ == "__main__":
     checkpoint_path = "./checkpoints/voice-restore-20d-16h.pt"
-    optimized_model_path = "./optimized_audio_restoration_model.pth"
     
     # Load the optimized model
-    optimized_model = load_optimized_model(optimized_model_path, optimization_type="state_dict")
+    optimized_model = load_model(checkpoint_path)
     optimized_model.eval()
     optimized_model.to(device)
     
