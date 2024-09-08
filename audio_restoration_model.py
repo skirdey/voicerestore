@@ -28,12 +28,12 @@ class OptimizedAudioRestorationModel(nn.Module):
         self.voice_restore.to(device)
 
 
-    def forward(self, wav):
+    def forward(self, audio, steps=32, cfg_strength=1.0):
         # Convert to Mel-spectrogram
-        processed_mel = get_mel_spectrogram(wav, bigvgan_model.h).to(device)
+        processed_mel = get_mel_spectrogram(audio, bigvgan_model.h).to(device)
     
         # Restore audio
-        restored_mel = self.voice_restore.sample(processed_mel.transpose(1,2), steps=32, cfg_strength=1.0)
+        restored_mel = self.voice_restore.sample(processed_mel.transpose(1,2), steps=steps, cfg_strength=cfg_strength)
         restored_mel = restored_mel.squeeze(0).transpose(0, 1)
         
         # Convert restored mel-spectrogram to waveform
@@ -59,12 +59,12 @@ def load_model(save_path):
     return optimized_model
 
 
-def restore_audio(model, input_path, output_path):
-    wav, sr = torchaudio.load(input_path)
-    wav = wav.mean(dim=0, keepdim=True) if wav.dim() > 1 else wav  # Convert to mono if stereo
+def restore_audio(model, input_path, output_path, steps=32, cfg_strength=1.0):  
+    audio, sr = torchaudio.load(input_path)
+    audio = audio.mean(dim=0, keepdim=True) if audio.dim() > 1 else audio  # Convert to mono if stereo
     
     with torch.inference_mode():
-        restored_wav = model(wav)
+        restored_wav = model(audio, steps=steps, cfg_strength=cfg_strength)
         restored_wav = restored_wav.squeeze(0).cpu()  # Move to CPU after processing
     
     torchaudio.save(output_path, restored_wav, sr)
