@@ -7,7 +7,9 @@ Demo of audio restorations: [VoiceRestore](https://sparkling-rabanadas-3082be.ne
 Credits: This repository is based on the [E2-TTS implementation by Lucidrains](https://github.com/lucidrains/e2-tts-pytorch)
 
 
-Careful, heavily distorded audio. Adjust your volume before playing.
+## Example
+
+
 
 ### Degraded Input: 
 
@@ -16,10 +18,12 @@ Careful, heavily distorded audio. Adjust your volume before playing.
 
 Degraded audio (reverberation, distortion, noise, random cut):
 
-<video controls="" autoplay="" name="media">
-    <source src="./audio/degraded.wav" type="audio/wav">
-</video>
 
+Careful, heavily distorded audio. Adjust your volume before playing.
+
+<video controls="" autoplay="" name="media">
+    <source src="./audio/degraded.mp4">
+</video>
 
 ---
 
@@ -30,7 +34,7 @@ Degraded audio (reverberation, distortion, noise, random cut):
 Restored audio - 32 steps, strength 1.0:
 
 <video controls="" autoplay="" name="media">
-    <source src="./audio/restored.wav" type="audio/wav">
+    <source src="./audio/restored.mp4">
 </video>
 
 ---
@@ -38,7 +42,6 @@ Restored audio - 32 steps, strength 1.0:
 ### Ground Truth:
 
 ![Ground Truth](./imgs/ground_truth.png "Ground Truth")
-
 
 ---
 ## Key Features
