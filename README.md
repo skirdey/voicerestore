@@ -21,9 +21,11 @@ Degraded audio (reverberation, distortion, noise, random cut):
 
 Careful, heavily distorded audio. Adjust your volume before playing.
 
-<video controls="" autoplay="" name="media">
-    <source src="./audio/degraded.mp4">
-</video>
+
+
+https://github.com/user-attachments/assets/0c030274-60b5-41a4-abe6-59a3f1bc934b
+
+
 
 ---
 
@@ -33,9 +35,11 @@ Careful, heavily distorded audio. Adjust your volume before playing.
 
 Restored audio - 32 steps, strength 1.0:
 
-<video controls="" autoplay="" name="media">
-    <source src="./audio/restored.mp4">
-</video>
+
+
+https://github.com/user-attachments/assets/633bc81c-8a52-477f-9f3a-eb51b907a7f9
+
+
 
 ---
 
