@@ -18,10 +18,7 @@ Credits: This repository is based on the [E2-TTS implementation by Lucidrains](h
 
 Degraded audio (reverberation, distortion, noise, random cut):
 
-
-Careful, heavily distorded audio. Adjust your volume before playing.
-
-
+**Careful, heavily distorded audio. Adjust your volume before playing.**
 
 https://github.com/user-attachments/assets/0c030274-60b5-41a4-abe6-59a3f1bc934b
 
@@ -36,9 +33,7 @@ https://github.com/user-attachments/assets/0c030274-60b5-41a4-abe6-59a3f1bc934b
 Restored audio - 32 steps, strength 1.0:
 
 
-
 https://github.com/user-attachments/assets/633bc81c-8a52-477f-9f3a-eb51b907a7f9
-
 
 
 ---
