@@ -16,7 +16,8 @@ Credits: This repository is based on the [E2-TTS implementation by Lucidrains](h
 ## Getting Started
 
  ```bash
-pip install torch torchaudio bigvgan jaxtyping einops x-transformers torchdiffeq gateloop-transformer
+git clone https://github.com/NVIDIA/BigVGAN.git
+pip install torch torchaudio jaxtyping einops x-transformers torchdiffeq gateloop-transformer
 ```
 
 - Download pre-trained checkpoint and place it into checkpoints folder. (TODO: will be released soon)

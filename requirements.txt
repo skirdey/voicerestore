@@ -1,6 +1,5 @@
 torch
 torchaudio
-bigvgan
 jaxtyping
 einops
 x-transformers
