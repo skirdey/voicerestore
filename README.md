@@ -2,9 +2,18 @@
 
 VoiceRestore is a state-of-the-art audio restoration model that leverages flow-matching transformers to address a wide range of audio degradations. This repository contains the pretrained model and code necessary to run VoiceRestore on your own degraded audio files.
 
-Demo page: [VoiceRestore](https://sparkling-rabanadas-3082be.netlify.app/)
+Demo of audio restorations: [VoiceRestore](https://sparkling-rabanadas-3082be.netlify.app/)
 
 Credits: This repository is based on the [E2-TTS implementation by Lucidrains](https://github.com/lucidrains/e2-tts-pytorch)
+
+
+Careful, heavily distorded audio. Adjust your volume before playing.
+
+
+<audio controls>
+  <source src="./audio/lq_heavy-distort-wall.wav" type="audio/wav">
+  Your browser does not support the audio element.
+</audio>
 
 ## Key Features
 
