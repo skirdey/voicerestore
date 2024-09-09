@@ -45,7 +45,7 @@ https://github.com/user-attachments/assets/633bc81c-8a52-477f-9f3a-eb51b907a7f9
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YourUsername/VoiceRestore.git
+   git clone https://github.com/skirdey/voicerestore.git
    cd VoiceRestore
    ```
 
