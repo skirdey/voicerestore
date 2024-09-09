@@ -16,10 +16,10 @@ Careful, heavily distorded audio. Adjust your volume before playing.
 
 Degraded audio (reverberation, distortion, noise, random cut):
 
-<audio controls>
-  <source src="./audio/degraded.wav" type="audio/wav">
-  Your browser does not support the audio element.
-</audio>
+<video controls="" autoplay="" name="media">
+    <source src="./audio/degraded.wav" type="audio/wav">
+</video>
+
 
 ---
 
@@ -29,10 +29,9 @@ Degraded audio (reverberation, distortion, noise, random cut):
 
 Restored audio - 32 steps, strength 1.0:
 
-<audio controls>
-  <source src="./audio/restored.wav" type="audio/wav">
-  Your browser does not support the audio element.
-</audio>
+<video controls="" autoplay="" name="media">
+    <source src="./audio/restored.wav" type="audio/wav">
+</video>
 
 ---
 
