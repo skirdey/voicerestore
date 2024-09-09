@@ -71,7 +71,7 @@ def restore_audio(model, input_path, output_path, steps=32, cfg_strength=1.0):
 
 # Example usage
 if __name__ == "__main__":
-    checkpoint_path = "./checkpoints/voice-restore-20d-16h.pt"
+    checkpoint_path = "./checkpoints/voice-restore-20d-16h-optim.pt"
     
     # Load the optimized model
     optimized_model = load_model(checkpoint_path)

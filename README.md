@@ -54,7 +54,7 @@ git clone https://github.com/NVIDIA/BigVGAN.git
 pip install torch torchaudio jaxtyping einops x-transformers torchdiffeq gateloop-transformer
 ```
 
-- Download pre-trained checkpoint and place it into checkpoints folder. (TODO: will be released soon)
+- [Download pre-trained checkpoint](https://drive.google.com/drive/folders/1uBJNp4mrPJQY9WEaiTI9u09IsRg1lAPR?usp=sharing) and place it into checkpoints folder. **NOTE: This checkpoint is very early in the training. The model will be updated further as it trains.**
 
 - Quick test: run below script should run on the test_input.wav file in the repository. The restored audio will be saved as test_output.wav.
 ```bash
