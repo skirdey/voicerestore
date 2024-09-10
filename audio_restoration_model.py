@@ -10,7 +10,9 @@ from voice_restore import VoiceRestore
 
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-bigvgan_model = bigvgan.BigVGAN.from_pretrained('nvidia/bigvgan_v2_24khz_100band_256x', use_cuda_kernel=True).to(device)
+
+# If running on non-windows syste, you can try using cuda kernel for faster processing `use_cuda_kernel=True`
+bigvgan_model = bigvgan.BigVGAN.from_pretrained('nvidia/bigvgan_v2_24khz_100band_256x', use_cuda_kernel=False).to(device)
 bigvgan_model.remove_weight_norm()
 example_input = torch.randn(1, 16000)  # Example input waveform
 example_spec = get_mel_spectrogram(example_input, bigvgan_model.h)
@@ -20,7 +22,7 @@ class OptimizedAudioRestorationModel(nn.Module):
         super().__init__()
 
         # Initialize VoiceRestore
-        self.voice_restore = VoiceRestore(sigma=0.1, transformer={
+        self.voice_restore = VoiceRestore(sigma=0.0, transformer={
             'dim': 768, 'depth': 20, 'heads': 16, 'dim_head': 64,
             'skip_connect_type': 'concat', 'max_seq_len': 2000,
         }, num_channels=100)
@@ -53,7 +55,10 @@ def load_model(save_path):
 
     optimized_model = OptimizedAudioRestorationModel()
     state_dict = torch.load(save_path)
-    optimized_model.voice_restore.load_state_dict(state_dict.get("model_state_dict"), strict=True)
+
+    print(state_dict.keys())
+
+    optimized_model.voice_restore.load_state_dict(state_dict, strict=True)
     print("Loaded model state_dict.")
 
     return optimized_model
