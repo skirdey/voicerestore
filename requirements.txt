@@ -1,7 +1,15 @@
-torch
+--extra-index-url https://download.pytorch.org/whl/cu124
+torch==2.4.1
 torchaudio
+torchvision
+librosa
+soundfile
 jaxtyping
 einops
 x-transformers
 torchdiffeq
 gateloop-transformer
+ninja
+matplotlib
+tqdm
+huggingface_hub

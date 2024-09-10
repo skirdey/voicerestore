@@ -10,8 +10,11 @@ from voice_restore import VoiceRestore
 
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+<<<<<<< HEAD
 
 # If running on non-windows syste, you can try using cuda kernel for faster processing `use_cuda_kernel=True`
+=======
+>>>>>>> e35c1ed19646c0429ad2700cae769b30c89e200a
 bigvgan_model = bigvgan.BigVGAN.from_pretrained('nvidia/bigvgan_v2_24khz_100band_256x', use_cuda_kernel=False).to(device)
 bigvgan_model.remove_weight_norm()
 example_input = torch.randn(1, 16000)  # Example input waveform
