@@ -10,7 +10,7 @@ from voice_restore import VoiceRestore
 
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-bigvgan_model = bigvgan.BigVGAN.from_pretrained('nvidia/bigvgan_v2_24khz_100band_256x', use_cuda_kernel=True).to(device)
+bigvgan_model = bigvgan.BigVGAN.from_pretrained('nvidia/bigvgan_v2_24khz_100band_256x', use_cuda_kernel=False).to(device)
 bigvgan_model.remove_weight_norm()
 example_input = torch.randn(1, 16000)  # Example input waveform
 example_spec = get_mel_spectrogram(example_input, bigvgan_model.h)

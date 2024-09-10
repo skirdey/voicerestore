@@ -49,9 +49,14 @@ https://github.com/user-attachments/assets/633bc81c-8a52-477f-9f3a-eb51b907a7f9
    cd VoiceRestore
    ```
 
+   if you did not clone with `--recurse-submodules`, you can run:
+   ```bash
+   git submodule update --init --recursive
+   ```
+
 2. Install dependencies:
    ```bash
-   pip install torch torchaudio jaxtyping einops x-transformers torchdiffeq gateloop-transformer
+   pip install torch torchaudio jaxtyping einops x-transformers torchdiffeq gateloop-transformer ninja matplotlib librosa soundfile tqdm huggingface_hub
    ```
 
 3. Download the [pre-trained model](https://drive.google.com/drive/folders/1uBJNp4mrPJQY9WEaiTI9u09IsRg1lAPR?usp=sharing) and place it in the `checkpoints` folder.
