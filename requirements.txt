@@ -13,3 +13,5 @@ matplotlib
 tqdm
 huggingface_hub
 matplotlib
+librosa
+tqdm
