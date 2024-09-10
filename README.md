@@ -22,11 +22,9 @@ https://github.com/user-attachments/assets/0c030274-60b5-41a4-abe6-59a3f1bc934b
 
 ![Restored](./imgs/restored.png "Restored")
 
-Restored audio - 32 steps, strength 1.0:
+Restored audio - 16 steps, strength 0.5:
 
-
-https://github.com/user-attachments/assets/633bc81c-8a52-477f-9f3a-eb51b907a7f9
-
+https://github.com/user-attachments/assets/fdbbb988-9bd2-4750-bddd-32bd5153d254
 
 ---
 ### Ground Truth:
