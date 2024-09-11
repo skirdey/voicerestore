@@ -18,7 +18,7 @@ example_input = torch.randn(1, 16000)  # Example input waveform
 example_spec = get_mel_spectrogram(example_input, bigvgan_model.h)
 
 class OptimizedAudioRestorationModel(nn.Module):
-    def __init__(self):
+    def __init__(self, target_sample_rate=24000):
         super().__init__()
 
         # Initialize VoiceRestore
@@ -28,6 +28,7 @@ class OptimizedAudioRestorationModel(nn.Module):
         }, num_channels=100)
         self.voice_restore.eval()
         self.voice_restore.to(device)
+        self.target_sample_rate = target_sample_rate
 
 
     def forward(self, audio, steps=32, cfg_strength=1.0):
@@ -56,27 +57,29 @@ def load_model(save_path):
     optimized_model = OptimizedAudioRestorationModel()
     state_dict = torch.load(save_path)
 
-    print(state_dict.keys())
-
     optimized_model.voice_restore.load_state_dict(state_dict, strict=True)
-    print("Loaded model state_dict.")
 
     return optimized_model
 
 
-def restore_audio(model, input_path, output_path, steps=32, cfg_strength=1.0):  
+def restore_audio(model, input_path, output_path, steps=64, cfg_strength=0.5):  
     audio, sr = torchaudio.load(input_path)
+
+    if sr != model.target_sample_rate:
+        audio = torchaudio.functional.resample(audio, sr, model.target_sample_rate)
+
+
     audio = audio.mean(dim=0, keepdim=True) if audio.dim() > 1 else audio  # Convert to mono if stereo
     
     with torch.inference_mode():
         restored_wav = model(audio, steps=steps, cfg_strength=cfg_strength)
         restored_wav = restored_wav.squeeze(0).cpu()  # Move to CPU after processing
     
-    torchaudio.save(output_path, restored_wav, sr)
+    torchaudio.save(output_path, restored_wav, model.target_sample_rate)
 
 # Example usage
 if __name__ == "__main__":
-    checkpoint_path = "./checkpoints/voice-restore-20d-16h-optim.pt"
+    checkpoint_path = "J:\git\voice-restore\checkpoints\voice-restore-20d-16h.pt"
     
     # Load the optimized model
     optimized_model = load_model(checkpoint_path)
