@@ -36,7 +36,7 @@ https://github.com/user-attachments/assets/fdbbb988-9bd2-4750-bddd-32bd5153d254
 
 - **Universal Restoration**: The model can handle any level and type of voice recording degradation. Pure magic.  
 - **Easy to Use**: Simple interface for processing degraded audio files.
-- **Pretrained Model**: Includes a 301 million parameter transformer model with pre-trained weights.
+- **Pretrained Model**: Includes a 301 million parameter transformer model with pre-trained weights. (Model is still in the process of training, there will be further checkpoint updates)
 
 ---
 ## Quick Start
