@@ -1,4 +1,4 @@
-# VoiceRestore: Universal Audio Quality Restoration
+# VoiceRestore: Flow-Matching Transformers for Speech Recording Quality Restoration
 
 VoiceRestore is a cutting-edge speech restoration model designed to significantly enhance the quality of degraded voice recordings. Leveraging flow-matching transformers, this model excels at addressing a wide range of audio imperfections commonly found in speech, including background noise, reverberation, distortion, and signal loss.
 
@@ -81,9 +81,9 @@ restored_audio = model.forward(input_audio, steps=32, cfg_strength=1.0)
 ## Model Details
 
 - **Architecture**: Flow-matching transformer
-- **Parameters**: 301 million
+- **Parameters**: 300M+ parameters
 - **Input**: Degraded speech audio (various formats supported)
-- **Output**: Restored high-quality speech audio
+- **Output**: Restored speech
 
 ## Limitations and Future Work
 
@@ -97,9 +97,9 @@ If you use VoiceRestore in your research, please cite our paper:
 
 ```
 @article{kirdey2024voicerestore,
-  title={VoiceRestore - Flow-Matching Transformers for Universal Audio Quality Restoration},
+  title={VoiceRestore: Flow-Matching Transformers for Speech Recording Quality Restoration},
   author={Kirdey, Stanislav},
-  journal={arXiv preprint arXiv:2024.XXXXX},
+  journal={arXiv},
   year={2024}
 }
 ```
