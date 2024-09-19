@@ -19,6 +19,7 @@ from functools import partial
 import torch
 from torch import nn
 from torch.nn import Module, ModuleList, Sequential, Linear
+import torch.nn.functional as F
 
 from torchdiffeq import odeint
 from einops.layers.torch import Rearrange
@@ -207,24 +208,28 @@ class VoiceRestore(nn.Module):
     def cfg_transformer_with_pred_head(
         self,
         *args,
-        cond: Optional[torch.Tensor] = None,
-        cfg_strength: float = 1.,
+        cond=None,
+        mask=None,
+        cfg_strength: float = 0.5,
         **kwargs,
-    ) -> torch.Tensor:
+    ):
         pred = self.transformer_with_pred_head(*args, **kwargs, cond=cond)
 
         if cfg_strength < 1e-5:
-            return pred
-
+            return pred * mask.unsqueeze(-1) if mask is not None else pred
+    
         null_pred = self.transformer_with_pred_head(*args, **kwargs, cond=None)
-
-        return pred + (pred - null_pred) * cfg_strength
+        
+        result = pred + (pred - null_pred) * cfg_strength
+        return result * mask.unsqueeze(-1) if mask is not None else result
 
 
     @torch.no_grad()
-    def sample(self, processed: torch.Tensor, steps: int = 32, cfg_strength: float = 1.) -> torch.Tensor:
+    def sample(self, processed: torch.Tensor, steps: int = 32, cfg_strength: float = 0.5) -> torch.Tensor:
         self.eval()
-        times = torch.linspace(0, 1, steps, device=processed.device)
+        epsilon = 1e-5
+        times = torch.linspace(epsilon, 1 - epsilon, steps, device=processed.device)
+
 
         def ode_fn(t: torch.Tensor, x: torch.Tensor) -> torch.Tensor:
             return self.cfg_transformer_with_pred_head(x, times=t, cond=processed, cfg_strength=cfg_strength)

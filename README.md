@@ -54,7 +54,7 @@ https://github.com/user-attachments/assets/fdbbb988-9bd2-4750-bddd-32bd5153d254
 
 2. Install dependencies:
    ```bash
-   pip install torch torchaudio jaxtyping einops x-transformers torchdiffeq gateloop-transformer ninja matplotlib librosa soundfile tqdm huggingface_hub
+   pip install -r requirements.txt
    ```
 
 3. Download the [pre-trained model](https://drive.google.com/drive/folders/1uBJNp4mrPJQY9WEaiTI9u09IsRg1lAPR?usp=sharing) and place it in the `checkpoints` folder.

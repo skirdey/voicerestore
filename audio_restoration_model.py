@@ -31,7 +31,7 @@ class OptimizedAudioRestorationModel(nn.Module):
         self.target_sample_rate = target_sample_rate
 
 
-    def forward(self, audio, steps=32, cfg_strength=1.0):
+    def forward(self, audio, steps=32, cfg_strength=0.5):
         # Convert to Mel-spectrogram
         processed_mel = get_mel_spectrogram(audio, bigvgan_model.h).to(device)
     
@@ -63,7 +63,7 @@ def load_model(save_path):
     return optimized_model
 
 
-def restore_audio(model, input_path, output_path, steps=64, cfg_strength=0.5):  
+def restore_audio(model, input_path, output_path, steps=16, cfg_strength=0.5):  
     audio, sr = torchaudio.load(input_path)
 
     if sr != model.target_sample_rate:
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     parser.add_argument('--checkpoint', type=str, required=True, help="Path to the checkpoint file")
     parser.add_argument('--input', type=str, required=True, help="Path to the input audio file")
     parser.add_argument('--output', type=str, required=True, help="Path to save the restored audio file")
-    parser.add_argument('--steps', type=int, default=64, help="Number of sampling steps")
+    parser.add_argument('--steps', type=int, default=16, help="Number of sampling steps")
     parser.add_argument('--cfg_strength', type=float, default=0.5, help="CFG strength value")
 
     # Parse arguments
