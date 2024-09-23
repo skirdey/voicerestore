@@ -54,8 +54,7 @@ def load_model(save_path):
     """
 
     optimized_model = OptimizedAudioRestorationModel()
-    state_dict = torch.load(save_path)
-
+    state_dict = torch.load(save_path, map_location=torch.device(device))
     if 'model_state_dict' in state_dict:
         state_dict = state_dict['model_state_dict']
     optimized_model.voice_restore.load_state_dict(state_dict, strict=True)
