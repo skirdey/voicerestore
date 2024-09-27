@@ -61,7 +61,7 @@ https://github.com/user-attachments/assets/fdbbb988-9bd2-4750-bddd-32bd5153d254
 
 4. Run a test restoration:
    ```bash
-   python audio_restoration_model.py --checkpoint ./checkpoints/voice-restore-20d-16h-optim.pt --input test_input.wav --output test_output.wav --steps 64 --cfg_strength 0.5
+   python audio_restoration_model.py --checkpoint ./checkpoints/voice-restore-20d-16h-optim.pt --input test_input.wav --output test_output.wav --steps 32 --cfg_strength 0.5
    ```
    This will process `test_input.wav` and save the result as `test_output.wav`.
 

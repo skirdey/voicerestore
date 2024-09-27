@@ -131,7 +131,7 @@ class Transformer(Module):
         norm_kwargs = {}
 
         if exists(self.abs_pos_emb):
-            assert seq_len <= self.max_seq_len, f'{seq_len} exceeds the set `max_seq_len` ({self.max_seq_len}) on Transformer'
+            # assert seq_len <= self.max_seq_len, f'{seq_len} exceeds the set `max_seq_len` ({self.max_seq_len}) on Transformer'
             seq = torch.arange(seq_len, device=device)
             x = x + self.abs_pos_emb(seq)
 
@@ -227,9 +227,7 @@ class VoiceRestore(nn.Module):
     @torch.no_grad()
     def sample(self, processed: torch.Tensor, steps: int = 32, cfg_strength: float = 0.5) -> torch.Tensor:
         self.eval()
-        epsilon = 1e-5
-        times = torch.linspace(epsilon, 1 - epsilon, steps, device=processed.device)
-
+        times = torch.linspace(0, 1, steps, device=processed.device)
 
         def ode_fn(t: torch.Tensor, x: torch.Tensor) -> torch.Tensor:
             return self.cfg_transformer_with_pred_head(x, times=t, cond=processed, cfg_strength=cfg_strength)
