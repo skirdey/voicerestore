@@ -61,19 +61,25 @@ https://github.com/user-attachments/assets/fdbbb988-9bd2-4750-bddd-32bd5153d254
 
 4. Run a test restoration:
    ```bash
-   python audio_restoration_model.py --checkpoint ./checkpoints/voice-restore-20d-16h-optim.pt --input test_input.wav --output test_output.wav --steps 32 --cfg_strength 0.5
+   python inference_short.py --checkpoint ./checkpoints/voice-restore-20d-16h-optim.pt --input test_input.wav --output test_output.wav --steps 32 --cfg_strength 0.5
    ```
    This will process `test_input.wav` and save the result as `test_output.wav`.
+
+5. Run a long form restoration, it uses window chunking:
+   ```bash
+   python inference_long.py --checkpoint ./checkpoints/voice-restore-20d-16h-optim.pt --input test_input_long.wav --output test_output_long.wav --steps 32 --cfg_strength 0.5 --window_size_sec 10.0 --overlap 0.25
+   ```
+   This will process `test_input_long.wav` (you need to provide it) and save the result as `test_output_long.wav`.
 
 ## Usage
 
 To restore your own audio files:
 
 ```python
-from audio_restoration_model import VoiceRestoreModel
+from model import OptimizedAudioRestorationModel
 
-model = VoiceRestoreModel()
-restored_audio = model.forward(input_audio, steps=32, cfg_strength=1.0)
+model = OptimizedAudioRestorationModel()
+restored_audio = model.forward(input_audio, steps=32, cfg_strength=0.5)
 ```
 
 
