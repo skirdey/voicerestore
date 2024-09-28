@@ -28,6 +28,7 @@ def load_model(save_path):
     """
 
     optimized_model = OptimizedAudioRestorationModel(device=device, bigvgan_model=bigvgan_model)
+    optimized_model = torch.compile(optimized_model)
     state_dict = torch.load(save_path, map_location=torch.device(device))
     if 'model_state_dict' in state_dict:
         state_dict = state_dict['model_state_dict']
