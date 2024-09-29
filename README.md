@@ -57,7 +57,7 @@ https://github.com/user-attachments/assets/fdbbb988-9bd2-4750-bddd-32bd5153d254
    pip install -r requirements.txt
    ```
 
-3. Download the [pre-trained model](https://drive.google.com/drive/folders/1uBJNp4mrPJQY9WEaiTI9u09IsRg1lAPR?usp=sharing) and place it in the `checkpoints` folder.
+3. Download the [pre-trained model](https://drive.google.com/drive/folders/1uBJNp4mrPJQY9WEaiTI9u09IsRg1lAPR?usp=sharing) and place it in the `checkpoints` folder. (Updated 9/29/2024)
 
 4. Run a test restoration:
    ```bash
