@@ -6,6 +6,18 @@ Demo of audio restorations: [VoiceRestore](https://sparkling-rabanadas-3082be.ne
 
 Credits: This repository is based on the [E2-TTS implementation by Lucidrains](https://github.com/lucidrains/e2-tts-pytorch)
 
+#### Super easy usage - using Transformers 🤗 by [@jadechoghari](https://github.com/jadechoghari) - Hugging Face
+<a href="https://huggingface.co/jadechoghari/VoiceRestore">
+  <img src="https://img.shields.io/badge/%F0%9F%A4%97%20VoiceRestore-blue" alt="VoiceRestore" height="25">
+</a>
+
+#### Build it locally on gradio in this [repo.](https://github.com/jadechoghari/VoiceRestore-demo)
+
+#### Try the Model here:
+<a href="https://huggingface.co/spaces/jadechoghari/VoiceRestore">
+  <img src="https://img.shields.io/badge/%F0%9F%A4%97%20VoiceRestore-orange" alt="VoiceRestore" height="25">
+</a>
+
 ## Example
 ### Degraded Input: 
 
@@ -80,6 +92,22 @@ from model import OptimizedAudioRestorationModel
 
 model = OptimizedAudioRestorationModel()
 restored_audio = model.forward(input_audio, steps=32, cfg_strength=0.5)
+```
+
+## Alternative Usage - using Transformers 🤗
+``` bash
+!git lfs install
+!git clone https://huggingface.co/jadechoghari/VoiceRestore
+%cd VoiceRestore
+!pip install -r requirements.txt
+```
+
+``` python
+from transformers import AutoModel
+# path to the model folder (on colab it's as follows)
+checkpoint_path = "/content/VoiceRestore"
+model = AutoModel.from_pretrained(checkpoint_path, trust_remote_code=True)
+model("test_input.wav", "test_output.wav")
 ```
 
 
